@@ -20,7 +20,7 @@ const VehicleRecords = () => {
     // 🔹 Load all vehicles for dropdown
     useEffect(() => {
         axios
-            .get("http://localhost:8081/vehicles")
+            .get("https://vehiclebackend-production-5d7c.up.railway.app/vehicles")
             .then((res) => setVehicles(res.data))
             .catch((err) => console.error("Error fetching vehicles", err));
     }, []);
@@ -30,7 +30,7 @@ const VehicleRecords = () => {
         if (!vehicleId) return;
         try {
             const res = await axios.get(
-                `http://localhost:8081/vehicle-services/vehicle/${vehicleId}`
+                `https://vehiclebackend-production-5d7c.up.railway.app/vehicle-services/vehicle/${vehicleId}`
             );
             setRecords(res.data);
         } catch (err) {
@@ -67,7 +67,7 @@ const VehicleRecords = () => {
         };
 
         try {
-            await axios.post("http://localhost:8081/vehicle-services", payload);
+            await axios.post("https://vehiclebackend-production-5d7c.up.railway.app/vehicle-services", payload);
             alert("✅ Service record added successfully!");
             setShowModal(false);
             fetchRecords(selectedVehicle.vehicleId);
@@ -82,7 +82,7 @@ const VehicleRecords = () => {
     const handleDelete = async (id) => {
         if (!window.confirm("Are you sure you want to delete this record?")) return;
         try {
-            await axios.delete(`http://localhost:8081/vehicle-services/${id}`);
+            await axios.delete(`https://vehiclebackend-production-5d7c.up.railway.app/vehicle-services/${id}`);
             fetchRecords(selectedVehicle.vehicleId);
         } catch (err) {
             console.error("Error deleting record:", err);

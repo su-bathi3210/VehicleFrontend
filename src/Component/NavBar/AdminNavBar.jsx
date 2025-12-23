@@ -10,7 +10,7 @@ export default function AdminNavBar() {
     const [showNotifications, setShowNotifications] = useState(false);
 
     const ADMIN_EMAIL = "ksuba3210@gmail.com";
-    const BACKEND_URL = "http://localhost:8081";
+    const BACKEND_URL = "https://vehiclebackend-production-5d7c.up.railway.app";
 
     const getInitials = (name) => {
         if (!name) return "A";

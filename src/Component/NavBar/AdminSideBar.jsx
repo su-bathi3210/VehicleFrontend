@@ -19,8 +19,8 @@ const AdminSideBar = () => {
     const fetchCounts = async () => {
         try {
             const [driverRes, vehicleRes] = await Promise.all([
-                axios.get("http://localhost:8081/drivers/count-expired"),
-                axios.get("http://localhost:8081/vehicles/count-expired"),
+                axios.get("https://vehiclebackend-production-5d7c.up.railway.app/drivers/count-expired"),
+                axios.get("https://vehiclebackend-production-5d7c.up.railway.app/vehicles/count-expired"),
             ]);
             
             const driverCount = Number(driverRes.data) || 0;

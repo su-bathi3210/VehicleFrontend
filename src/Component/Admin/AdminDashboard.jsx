@@ -25,12 +25,12 @@ const AdminDashboard = () => {
                     expiredRes,
                     requestsYearRes
                 ] = await Promise.all([
-                    axios.get("http://localhost:8081/vehicle-requests/count"),
-                    axios.get("http://localhost:8081/vehicle-requests/count-assigned"),
-                    axios.get("http://localhost:8081/drivers/count-available"),
-                    axios.get("http://localhost:8081/vehicles/count-available"),
-                    axios.get("http://localhost:8081/vehicles/count-expired"),
-                    axios.get("http://localhost:8081/vehicle-requests/count-per-year")
+                    axios.get("https://vehiclebackend-production-5d7c.up.railway.app/vehicle-requests/count"),
+                    axios.get("https://vehiclebackend-production-5d7c.up.railway.app/vehicle-requests/count-assigned"),
+                    axios.get("https://vehiclebackend-production-5d7c.up.railway.app/drivers/count-available"),
+                    axios.get("https://vehiclebackend-production-5d7c.up.railway.app/vehicles/count-available"),
+                    axios.get("https://vehiclebackend-production-5d7c.up.railway.app/vehicles/count-expired"),
+                    axios.get("https://vehiclebackend-production-5d7c.up.railway.app/vehicle-requests/count-per-year")
                 ]);
 
                 // Update dashboard counts

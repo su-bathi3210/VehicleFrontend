@@ -28,7 +28,7 @@ const AddVehicle = () => {
 
     const fetchVehicles = async () => {
         try {
-            const res = await axios.get("http://localhost:8081/vehicles");
+            const res = await axios.get("https://vehiclebackend-production-5d7c.up.railway.app/vehicles");
             setVehicles(res.data || []);
             setFilteredVehicles(res.data || []);
         } catch (err) {
@@ -157,13 +157,13 @@ const AddVehicle = () => {
         try {
             if (modalMode === "edit" && modalData.vehicleId) {
                 await axios.put(
-                    `http://localhost:8081/vehicles/${modalData.vehicleId}`,
+                    `https://vehiclebackend-production-5d7c.up.railway.app/vehicles/${modalData.vehicleId}`,
                     payload
                 );
                 alert("✅ Vehicle updated successfully!");
             } else {
                 payload.vehicleId = generateVehicleId();
-                await axios.post("http://localhost:8081/vehicles", payload);
+                await axios.post("https://vehiclebackend-production-5d7c.up.railway.app/vehicles", payload);
                 alert("✅ Vehicle added successfully!");
             }
 
@@ -184,7 +184,7 @@ const AddVehicle = () => {
         if (!vehicle?.vehicleId) return;
         if (!window.confirm("Are you sure you want to delete this vehicle?")) return;
         try {
-            await axios.delete(`http://localhost:8081/vehicles/${vehicle.vehicleId}`);
+            await axios.delete(`https://vehiclebackend-production-5d7c.up.railway.app/vehicles/${vehicle.vehicleId}`);
             alert("✅ Vehicle deleted successfully!");
             fetchVehicles();
         } catch (err) {

@@ -31,7 +31,7 @@ export default function Assign() {
 
     const fetchRequests = async () => {
         try {
-            const res = await axios.get("http://localhost:8081/vehicle-requests/admin", {
+            const res = await axios.get("https://vehiclebackend-production-5d7c.up.railway.app/vehicle-requests/admin", {
                 headers: { Authorization: `Bearer ${token}` }
             });
             setPendingRequests(res.data.filter(r => r.status === "PENDING"));
@@ -53,7 +53,7 @@ export default function Assign() {
 
     const fetchCancellationRequests = async () => {
         try {
-            const res = await axios.get("http://localhost:8081/vehicle-requests/admin", {
+            const res = await axios.get("https://vehiclebackend-production-5d7c.up.railway.app/vehicle-requests/admin", {
                 headers: { Authorization: `Bearer ${token}` }
             });
             setCancellationRequests(res.data.filter(r => r.status === "CANCELLATION_REQUESTED"));
@@ -64,7 +64,7 @@ export default function Assign() {
 
     const fetchVehicles = async () => {
         try {
-            const res = await axios.get("http://localhost:8081/vehicles/available", {
+            const res = await axios.get("https://vehiclebackend-production-5d7c.up.railway.app/vehicles/available", {
                 headers: { Authorization: `Bearer ${token}` }
             });
             setVehicles(res.data);
@@ -75,7 +75,7 @@ export default function Assign() {
 
     const fetchDrivers = async () => {
         try {
-            const res = await axios.get("http://localhost:8081/drivers/available", {
+            const res = await axios.get("https://vehiclebackend-production-5d7c.up.railway.app/drivers/available", {
                 headers: { Authorization: `Bearer ${token}` }
             });
             setDrivers(res.data);
@@ -92,7 +92,7 @@ export default function Assign() {
         }
         try {
             await axios.put(
-                `http://localhost:8081/vehicle-requests/assign/${requestId}/${vehicleId}`,
+                `https://vehiclebackend-production-5d7c.up.railway.app/vehicle-requests/assign/${requestId}/${vehicleId}`,
                 {},
                 { headers: { Authorization: `Bearer ${token}` } }
             );
@@ -115,7 +115,7 @@ export default function Assign() {
         }
         try {
             await axios.put(
-                `http://localhost:8081/vehicle-requests/assign-driver/${requestId}/${driverId}`,
+                `https://vehiclebackend-production-5d7c.up.railway.app/vehicle-requests/assign-driver/${requestId}/${driverId}`,
                 {},
                 { headers: { Authorization: `Bearer ${token}` } }
             );
@@ -143,7 +143,7 @@ export default function Assign() {
 
         try {
             await axios.put(
-                `http://localhost:8081/vehicle-requests/${request.requestId}/cancel`,
+                `https://vehiclebackend-production-5d7c.up.railway.app/vehicle-requests/${request.requestId}/cancel`,
                 { travelerName, phoneNumber, reason },
                 { headers: { Authorization: `Bearer ${token}` } }
             );
@@ -158,7 +158,7 @@ export default function Assign() {
     const approveCancellation = async (requestId) => {
         try {
             await axios.put(
-                `http://localhost:8081/vehicle-requests/${requestId}/cancel/approve`,
+                `https://vehiclebackend-production-5d7c.up.railway.app/vehicle-requests/${requestId}/cancel/approve`,
                 {},
                 { headers: { Authorization: `Bearer ${token}` } }
             );
@@ -173,7 +173,7 @@ export default function Assign() {
 
     const fetchCancellationCount = async () => {
         try {
-            const res = await axios.get("http://localhost:8081/vehicle-requests/admin", {
+            const res = await axios.get("https://vehiclebackend-production-5d7c.up.railway.app/vehicle-requests/admin", {
                 headers: { Authorization: `Bearer ${token}` }
             });
             const count = res.data.filter(r => r.status === "CANCELLATION_REQUESTED").length;

@@ -35,7 +35,7 @@ const AddDrivers = () => {
 
     const fetchDrivers = async () => {
         try {
-            const res = await axios.get("http://localhost:8081/drivers");
+            const res = await axios.get("https://vehiclebackend-production-5d7c.up.railway.app/drivers");
             setDrivers(res.data || []);
             setFilteredDrivers(res.data || []);
         } catch (err) {
@@ -160,14 +160,14 @@ const AddDrivers = () => {
         try {
             if (modalMode === "edit" && modalData.driverId) {
                 await axios.put(
-                    `http://localhost:8081/drivers/${modalData.driverId}`,
+                    `https://vehiclebackend-production-5d7c.up.railway.app/drivers/${modalData.driverId}`,
                     payload
                 );
                 alert("✅ Driver updated successfully!");
             } else {
                 const id = generateDriverId();
                 payload.driverId = id;
-                await axios.post("http://localhost:8081/drivers", payload);
+                await axios.post("https://vehiclebackend-production-5d7c.up.railway.app/drivers", payload);
                 alert("✅ Driver added successfully!");
             }
 
@@ -184,7 +184,7 @@ const AddDrivers = () => {
         if (!driver || !driver.driverId) return;
         if (!window.confirm("Are you sure you want to delete this driver?")) return;
         try {
-            await axios.delete(`http://localhost:8081/drivers/${driver.driverId}`);
+            await axios.delete(`https://vehiclebackend-production-5d7c.up.railway.app/drivers/${driver.driverId}`);
             alert("✅ Driver deleted successfully!");
             fetchDrivers();
         } catch (err) {

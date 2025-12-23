@@ -23,7 +23,7 @@ export default function RequestHistory() {
 
     const fetchHistory = async () => {
         try {
-            const res = await axios.get("http://localhost:8081/vehicle-requests/admin", {
+            const res = await axios.get("https://vehiclebackend-production-5d7c.up.railway.app/vehicle-requests/admin", {
                 headers: { Authorization: `Bearer ${token}` },
             });
 
@@ -98,7 +98,7 @@ export default function RequestHistory() {
         }
 
         try {
-            const res = await axios.get(`http://localhost:8081/vehicle-requests/${id}/assigned-details`, {
+            const res = await axios.get(`https://vehiclebackend-production-5d7c.up.railway.app/vehicle-requests/${id}/assigned-details`, {
                 headers: { Authorization: `Bearer ${token}` },
             });
 

@@ -16,7 +16,7 @@ export default function ApprovalDashboard() {
     const fetchRequests = async () => {
         try {
             const res = await axios.get(
-                "http://localhost:8081/vehicle-requests/officer",
+                "https://vehiclebackend-production-5d7c.up.railway.app/vehicle-requests/officer",
                 { headers: { Authorization: `Bearer ${token}` } }
             );
             setRequests(res.data);

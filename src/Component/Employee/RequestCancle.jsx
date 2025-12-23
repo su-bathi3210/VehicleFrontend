@@ -4,7 +4,7 @@ import RequestCancelNavbar from "../NavBar/RequestCancelNavbar";
 import { useLocation, useNavigate } from "react-router-dom";
 import "../../App.css";
 
-const API_ROOT = "http://localhost:8081/vehicle-requests";
+const API_ROOT = "https://vehiclebackend-production-5d7c.up.railway.app/vehicle-requests";
 
 const RequestCancel = () => {
     const location = useLocation();
