@@ -3,9 +3,8 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../../App.css";
 
-const API_ROOT = "https://vehiclebackend-production-5d7c.up.railway.app";
-
 const VehicleRecords = () => {
+    const API_BASE_URL = import.meta.env.VITE_BACKEND_URL;
     const [vehicles, setVehicles] = useState([]);
     const [records, setRecords] = useState([]);
     const navigate = useNavigate();
@@ -34,7 +33,7 @@ const VehicleRecords = () => {
     // Fetch all vehicles
     const fetchVehicles = async () => {
         try {
-            const res = await axios.get(`${API_ROOT}/vehicles`);
+            const res = await axios.get(`${API_BASE_URL}/vehicles`);
             setVehicles(res.data || []);
         } catch (err) {
             console.error("Error fetching vehicles:", err);
@@ -45,7 +44,7 @@ const VehicleRecords = () => {
     // Fetch service interval defaults
     const fetchIntervals = async () => {
         try {
-            const res = await axios.get(`${API_ROOT}/vehicle-services/service-intervals`);
+            const res = await axios.get(`${API_BASE_URL}/vehicle-services/service-intervals`);
             if (res.data) setServiceIntervals(res.data);
         } catch (err) {
             console.info("Could not fetch service intervals from backend, using defaults.");
@@ -55,7 +54,7 @@ const VehicleRecords = () => {
     // Fetch all records
     const fetchAllRecords = async () => {
         try {
-            const res = await axios.get(`${API_ROOT}/vehicle-services`);
+            const res = await axios.get(`${API_BASE_URL}/vehicle-services`);
             const mapped = (res.data || []).map((r) => ({
                 ...r,
                 serviceDate: r.serviceDate || r.date || null,
@@ -70,7 +69,7 @@ const VehicleRecords = () => {
     // Fetch records for one vehicle
     const fetchRecords = async (vehicleId) => {
         try {
-            const res = await axios.get(`${API_ROOT}/vehicle-services/vehicle/${vehicleId}`);
+            const res = await axios.get(`${API_BASE_URL}/vehicle-services/vehicle/${vehicleId}`);
             const mapped = (res.data || []).map((r) => ({
                 ...r,
                 serviceDate: r.serviceDate || r.date || null,
@@ -149,7 +148,7 @@ const VehicleRecords = () => {
         };
 
         try {
-            await axios.post(`${API_ROOT}/vehicle-services`, payload);
+            await axios.post(`${API_BASE_URL}/vehicle-services`, payload);
             alert("✅ Service record added successfully!");
             setShowAddModal(false);
             setRecordData({
@@ -172,7 +171,7 @@ const VehicleRecords = () => {
     const handleDeleteRecord = async (recordId) => {
         if (!window.confirm("Are you sure you want to delete this record?")) return;
         try {
-            await axios.delete(`${API_ROOT}/vehicle-services/${recordId}`);
+            await axios.delete(`${API_BASE_URL}/vehicle-services/${recordId}`);
             alert("✅ Record deleted successfully!");
             if (selectedVehicle) fetchRecords(selectedVehicle.vehicleId);
             else fetchAllRecords();
@@ -206,7 +205,7 @@ const VehicleRecords = () => {
         };
 
         try {
-            await axios.put(`${API_ROOT}/vehicle-services/${id}/mileage`, payload);
+            await axios.put(`${API_BASE_URL}/vehicle-services/${id}/mileage`, payload);
             alert("✅ Mileage updated");
             setShowEditModal(false);
             setEditRecord(null);
@@ -230,7 +229,7 @@ const VehicleRecords = () => {
         const payload = { serviceCount: newCount };
 
         try {
-            await axios.put(`${API_ROOT}/vehicle-services/${id}/service-count`, payload);
+            await axios.put(`${API_BASE_URL}/vehicle-services/${id}/service-count`, payload);
             alert("✅ Service count updated");
             setShowEditModal(false);
             setEditRecord(null);

@@ -4,9 +4,8 @@ import RequestCancelNavbar from "../NavBar/RequestCancelNavbar";
 import { useLocation, useNavigate } from "react-router-dom";
 import "../../App.css";
 
-const API_ROOT = "https://vehiclebackend-production-5d7c.up.railway.app/vehicle-requests";
-
 const RequestCancel = () => {
+    const API_BASE_URL = import.meta.env.VITE_BACKEND_URL;
     const location = useLocation();
     const navigate = useNavigate();
     const { travelerName, phoneNumber } = location.state || {};
@@ -25,7 +24,7 @@ const RequestCancel = () => {
     const fetchMyRequests = async () => {
         try {
             const res = await axios.get(
-                `${API_ROOT}/my-requests?travelerName=${travelerName}&phoneNumber=${phoneNumber}`
+                `${API_BASE_URL}/my-requests?travelerName=${travelerName}&phoneNumber=${phoneNumber}`
             );
             setRequests(res.data);
         } catch (err) {
@@ -39,7 +38,7 @@ const RequestCancel = () => {
         if (!window.confirm(`Are you sure you want to cancel Request ${reqId}?`)) return;
 
         try {
-            const res = await axios.put(`${API_ROOT}/${reqId}/cancel`, {
+            const res = await axios.put(`${API_BASE_URL}/${reqId}/cancel`, {
                 travelerName,
                 phoneNumber,
                 reason,

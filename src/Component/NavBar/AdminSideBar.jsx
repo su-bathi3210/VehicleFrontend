@@ -12,6 +12,7 @@ import axios from "axios";
 import "../../App.css";
 
 const AdminSideBar = () => {
+    const API_BASE_URL = import.meta.env.VITE_BACKEND_URL;
     const location = useLocation();
     const [expiredDriversCount, setExpiredDriversCount] = useState(0);
     const [expiredVehiclesCount, setExpiredVehiclesCount] = useState(0);
@@ -19,8 +20,8 @@ const AdminSideBar = () => {
     const fetchCounts = async () => {
         try {
             const [driverRes, vehicleRes] = await Promise.all([
-                axios.get("https://vehiclebackend-production-5d7c.up.railway.app/drivers/count-expired"),
-                axios.get("https://vehiclebackend-production-5d7c.up.railway.app/vehicles/count-expired"),
+                axios.get(`${API_BASE_URL}/drivers/count-expired`),
+                axios.get(`${API_BASE_URL}/vehicles/count-expired`),
             ]);
             
             const driverCount = Number(driverRes.data) || 0;

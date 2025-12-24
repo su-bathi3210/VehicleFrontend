@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import "../../App.css";
 
 export default function VehicleRequestForm() {
+    const API_BASE_URL = import.meta.env.VITE_BACKEND_URL;
     const [formData, setFormData] = useState({
         requesterName: "",
         requesterPosition: "",
@@ -123,7 +124,7 @@ export default function VehicleRequestForm() {
             const requestId = generateRequestId();
             const payload = { ...formData, requestId };
 
-            await fetch("https://vehiclebackend-production-5d7c.up.railway.app/vehicle-requests", {
+            await fetch(`${API_BASE_URL}/vehicle-requests`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(payload),

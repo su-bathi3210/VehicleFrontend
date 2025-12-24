@@ -4,6 +4,7 @@ import "../../App.css";
 import { useNavigate } from "react-router-dom";
 
 const VehicleRecords = () => {
+    const API_BASE_URL = import.meta.env.VITE_BACKEND_URL;
     const [vehicles, setVehicles] = useState([]);
     const [selectedVehicle, setSelectedVehicle] = useState(null);
     const [records, setRecords] = useState([]);
@@ -20,7 +21,7 @@ const VehicleRecords = () => {
     // 🔹 Load all vehicles for dropdown
     useEffect(() => {
         axios
-            .get("https://vehiclebackend-production-5d7c.up.railway.app/vehicles")
+            .get(`${API_BASE_URL}/vehicles`)
             .then((res) => setVehicles(res.data))
             .catch((err) => console.error("Error fetching vehicles", err));
     }, []);
@@ -30,7 +31,7 @@ const VehicleRecords = () => {
         if (!vehicleId) return;
         try {
             const res = await axios.get(
-                `https://vehiclebackend-production-5d7c.up.railway.app/vehicle-services/vehicle/${vehicleId}`
+                `${API_BASE_URL}/vehicle-services/vehicle/${vehicleId}`
             );
             setRecords(res.data);
         } catch (err) {
@@ -67,7 +68,7 @@ const VehicleRecords = () => {
         };
 
         try {
-            await axios.post("https://vehiclebackend-production-5d7c.up.railway.app/vehicle-services", payload);
+            await axios.post(`${API_BASE_URL}/vehicle-services`, payload);
             alert("✅ Service record added successfully!");
             setShowModal(false);
             fetchRecords(selectedVehicle.vehicleId);
@@ -82,7 +83,7 @@ const VehicleRecords = () => {
     const handleDelete = async (id) => {
         if (!window.confirm("Are you sure you want to delete this record?")) return;
         try {
-            await axios.delete(`https://vehiclebackend-production-5d7c.up.railway.app/vehicle-services/${id}`);
+            await axios.delete(`${API_BASE_URL}/vehicle-services/${id}`);
             fetchRecords(selectedVehicle.vehicleId);
         } catch (err) {
             console.error("Error deleting record:", err);

@@ -3,9 +3,8 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "../../App.css";
 
-const API_ROOT = "https://vehiclebackend-production-5d7c.up.railway.app/vehicle-requests";
-
 const EmployeeLogin = () => {
+    const API_BASE_URL = import.meta.env.VITE_BACKEND_URL;
     const [requestId, setRequestId] = useState("");
     const [travelerName, setTravelerName] = useState("");
     const [phoneNumber, setPhoneNumber] = useState("");
@@ -19,7 +18,7 @@ const EmployeeLogin = () => {
         setLoading(true);
 
         try {
-            const response = await axios.post(`${API_ROOT}/employee-login`, {
+            const response = await axios.post(`${API_BASE_URL}/employee-login`, {
                 requestId,
                 travelerName,
                 phoneNumber,

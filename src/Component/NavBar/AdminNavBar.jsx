@@ -10,7 +10,7 @@ export default function AdminNavBar() {
     const [showNotifications, setShowNotifications] = useState(false);
 
     const ADMIN_EMAIL = "ksuba3210@gmail.com";
-    const BACKEND_URL = "https://vehiclebackend-production-5d7c.up.railway.app";
+    const API_BASE_URL = import.meta.env.VITE_BACKEND_URL;
 
     const getInitials = (name) => {
         if (!name) return "A";
@@ -23,7 +23,7 @@ export default function AdminNavBar() {
 
     const fetchNotifications = async () => {
         try {
-            const res = await fetch(`${BACKEND_URL}/notifications/${ADMIN_EMAIL}`);
+            const res = await fetch(`${API_BASE_URL}/notifications/${ADMIN_EMAIL}`);
             if (res.ok) {
                 const data = await res.json();
                 console.log("📩 Notifications:", data);
@@ -58,7 +58,7 @@ export default function AdminNavBar() {
 
     const markAsRead = async (id) => {
         try {
-            await fetch(`${BACKEND_URL}/notifications/read/${id}`, { method: "PUT" });
+            await fetch(`${API_BASE_URL}/notifications/read/${id}`, { method: "PUT" });
             setNotifications((prev) => prev.filter((n) => n.id !== id));
         } catch (err) {
             console.error("❌ Error marking notification as read", err);

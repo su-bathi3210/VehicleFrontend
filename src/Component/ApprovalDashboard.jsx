@@ -4,6 +4,7 @@ import "../App.css";
 import ApprovalOfficerNavBar from "./NavBar/ApprovalOfficerNavBar";
 
 export default function ApprovalDashboard() {
+    const API_BASE_URL = import.meta.env.VITE_BACKEND_URL;
     const [requests, setRequests] = useState([]);
     const [expandedRequestId, setExpandedRequestId] = useState(null);
     const [assignedDetails, setAssignedDetails] = useState({});
@@ -16,7 +17,7 @@ export default function ApprovalDashboard() {
     const fetchRequests = async () => {
         try {
             const res = await axios.get(
-                "https://vehiclebackend-production-5d7c.up.railway.app/vehicle-requests/officer",
+                `${API_BASE_URL}/vehicle-requests/officer`,
                 { headers: { Authorization: `Bearer ${token}` } }
             );
             setRequests(res.data);
@@ -33,7 +34,7 @@ export default function ApprovalDashboard() {
 
         try {
             const res = await axios.get(
-                `http://localhost:8081/vehicle-requests/${id}/assigned-details`,
+                `${API_BASE_URL}/vehicle-requests/${id}/assigned-details`,
                 { headers: { Authorization: `Bearer ${token}` } }
             );
             setAssignedDetails((prev) => ({
@@ -49,7 +50,7 @@ export default function ApprovalDashboard() {
     const approve = async (id) => {
         try {
             await axios.put(
-                `http://localhost:8081/vehicle-requests/approve/${id}`,
+                `${API_BASE_URL}/vehicle-requests/approve/${id}`,
                 {},
                 { headers: { Authorization: `Bearer ${token}` } }
             );
@@ -62,7 +63,7 @@ export default function ApprovalDashboard() {
     const reject = async (id) => {
         try {
             await axios.put(
-                `http://localhost:8081/vehicle-requests/reject/${id}`,
+                `${API_BASE_URL}/vehicle-requests/reject/${id}`,
                 {},
                 { headers: { Authorization: `Bearer ${token}` } }
             );

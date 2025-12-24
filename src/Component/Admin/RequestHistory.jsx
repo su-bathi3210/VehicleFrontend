@@ -7,6 +7,7 @@ import { saveAs } from "file-saver";
 import "../../App.css";
 
 export default function RequestHistory() {
+    const API_BASE_URL = import.meta.env.VITE_BACKEND_URL;
     const [requests, setRequests] = useState([]);
     const [filteredRequests, setFilteredRequests] = useState([]);
     const [selectedYear, setSelectedYear] = useState("All");
@@ -23,7 +24,7 @@ export default function RequestHistory() {
 
     const fetchHistory = async () => {
         try {
-            const res = await axios.get("https://vehiclebackend-production-5d7c.up.railway.app/vehicle-requests/admin", {
+            const res = await axios.get(`${API_BASE_URL}/vehicle-requests/admin`, {
                 headers: { Authorization: `Bearer ${token}` },
             });
 
@@ -98,7 +99,7 @@ export default function RequestHistory() {
         }
 
         try {
-            const res = await axios.get(`https://vehiclebackend-production-5d7c.up.railway.app/vehicle-requests/${id}/assigned-details`, {
+            const res = await axios.get(`${API_BASE_URL}/vehicle-requests/${id}/assigned-details`, {
                 headers: { Authorization: `Bearer ${token}` },
             });
 
