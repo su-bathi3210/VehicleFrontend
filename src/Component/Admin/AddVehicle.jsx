@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import "../../App.css";
 
 const AddVehicle = () => {
-    const API_BASE_URL = process.env.REACT_APP_BACKEND_URL;
+    const API_BASE_URL = import.meta.env.VITE_BACKEND_URL;
     const [vehicles, setVehicles] = useState([]);
     const [filteredVehicles, setFilteredVehicles] = useState([]);
     const [expiredVehicles, setExpiredVehicles] = useState([]);

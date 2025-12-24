@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import "../../App.css";
 
 const Login = () => {
-    const API_BASE_URL = process.env.REACT_APP_BACKEND_URL;
+    const API_BASE_URL = import.meta.env.VITE_BACKEND_URL;
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");

@@ -3,7 +3,7 @@ import axios from "axios";
 import "../../App.css";
 
 const AddDrivers = () => {
-    const API_BASE_URL = process.env.REACT_APP_BACKEND_URL;
+    const API_BASE_URL = import.meta.env.VITE_BACKEND_URL;
     const [drivers, setDrivers] = useState([]);
     const [filteredDrivers, setFilteredDrivers] = useState([]);
     const [filters, setFilters] = useState({

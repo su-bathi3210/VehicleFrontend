@@ -3,7 +3,7 @@ import axios from "axios";
 import "./VehicleAssign.css";
 
 export default function Assign() {
-    const API_BASE_URL = process.env.REACT_APP_BACKEND_URL;
+    const API_BASE_URL = import.meta.env.VITE_BACKEND_URL;
     const [pendingRequests, setPendingRequests] = useState([]);
     const [approvedByAdmin, setApprovedByAdmin] = useState([]);
     const [approvedByOfficer, setApprovedByOfficer] = useState([]);

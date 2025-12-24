@@ -4,7 +4,7 @@ import { PieChart, Pie, Cell, Tooltip, Legend } from "recharts";
 import "../../App.css";
 
 const AdminDashboard = () => {
-    const API_BASE_URL = process.env.REACT_APP_BACKEND_URL;
+    const API_BASE_URL = import.meta.env.VITE_BACKEND_URL;
     const [counts, setCounts] = useState({
         requests: 0,
         assignedRequests: 0,
