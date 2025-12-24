@@ -123,7 +123,7 @@ export default function VehicleRequestForm() {
             const requestId = generateRequestId();
             const payload = { ...formData, requestId };
 
-            await fetch("http://localhost:8081/vehicle-requests", {
+            await fetch("https://vehiclebackend-production-5d7c.up.railway.app/vehicle-requests", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(payload),

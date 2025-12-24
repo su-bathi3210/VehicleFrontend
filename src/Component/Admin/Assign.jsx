@@ -3,6 +3,7 @@ import axios from "axios";
 import "./VehicleAssign.css";
 
 export default function Assign() {
+    const API_BASE_URL = process.env.REACT_APP_BACKEND_URL;
     const [pendingRequests, setPendingRequests] = useState([]);
     const [approvedByAdmin, setApprovedByAdmin] = useState([]);
     const [approvedByOfficer, setApprovedByOfficer] = useState([]);
@@ -31,7 +32,7 @@ export default function Assign() {
 
     const fetchRequests = async () => {
         try {
-            const res = await axios.get("https://vehiclebackend-production-5d7c.up.railway.app/vehicle-requests/admin", {
+            const res = await axios.get(`${API_BASE_URL}/vehicle-requests/admin`, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             setPendingRequests(res.data.filter(r => r.status === "PENDING"));
@@ -53,7 +54,7 @@ export default function Assign() {
 
     const fetchCancellationRequests = async () => {
         try {
-            const res = await axios.get("https://vehiclebackend-production-5d7c.up.railway.app/vehicle-requests/admin", {
+            const res = await axios.get(`${API_BASE_URL}/vehicle-requests/admin`, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             setCancellationRequests(res.data.filter(r => r.status === "CANCELLATION_REQUESTED"));
@@ -64,7 +65,7 @@ export default function Assign() {
 
     const fetchVehicles = async () => {
         try {
-            const res = await axios.get("https://vehiclebackend-production-5d7c.up.railway.app/vehicles/available", {
+            const res = await axios.get(`${API_BASE_URL}/vehicles/available`, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             setVehicles(res.data);
@@ -75,7 +76,7 @@ export default function Assign() {
 
     const fetchDrivers = async () => {
         try {
-            const res = await axios.get("https://vehiclebackend-production-5d7c.up.railway.app/drivers/available", {
+            const res = await axios.get(`${API_BASE_URL}/drivers/available`, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             setDrivers(res.data);
@@ -92,7 +93,7 @@ export default function Assign() {
         }
         try {
             await axios.put(
-                `https://vehiclebackend-production-5d7c.up.railway.app/vehicle-requests/assign/${requestId}/${vehicleId}`,
+                `${API_BASE_URL}/vehicle-requests/assign/${requestId}/${vehicleId}`,
                 {},
                 { headers: { Authorization: `Bearer ${token}` } }
             );
@@ -115,7 +116,7 @@ export default function Assign() {
         }
         try {
             await axios.put(
-                `https://vehiclebackend-production-5d7c.up.railway.app/vehicle-requests/assign-driver/${requestId}/${driverId}`,
+                `${API_BASE_URL}/vehicle-requests/assign-driver/${requestId}/${driverId}`,
                 {},
                 { headers: { Authorization: `Bearer ${token}` } }
             );
@@ -143,7 +144,7 @@ export default function Assign() {
 
         try {
             await axios.put(
-                `https://vehiclebackend-production-5d7c.up.railway.app/vehicle-requests/${request.requestId}/cancel`,
+                `${API_BASE_URL}/vehicle-requests/${request.requestId}/cancel`,
                 { travelerName, phoneNumber, reason },
                 { headers: { Authorization: `Bearer ${token}` } }
             );
@@ -158,7 +159,7 @@ export default function Assign() {
     const approveCancellation = async (requestId) => {
         try {
             await axios.put(
-                `https://vehiclebackend-production-5d7c.up.railway.app/vehicle-requests/${requestId}/cancel/approve`,
+                `${API_BASE_URL}/vehicle-requests/${requestId}/cancel/approve`,
                 {},
                 { headers: { Authorization: `Bearer ${token}` } }
             );
@@ -173,7 +174,7 @@ export default function Assign() {
 
     const fetchCancellationCount = async () => {
         try {
-            const res = await axios.get("https://vehiclebackend-production-5d7c.up.railway.app/vehicle-requests/admin", {
+            const res = await axios.get(`${API_BASE_URL}/vehicle-requests/admin`, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             const count = res.data.filter(r => r.status === "CANCELLATION_REQUESTED").length;

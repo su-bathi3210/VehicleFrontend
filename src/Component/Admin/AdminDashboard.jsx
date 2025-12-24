@@ -4,6 +4,7 @@ import { PieChart, Pie, Cell, Tooltip, Legend } from "recharts";
 import "../../App.css";
 
 const AdminDashboard = () => {
+    const API_BASE_URL = process.env.REACT_APP_BACKEND_URL;
     const [counts, setCounts] = useState({
         requests: 0,
         assignedRequests: 0,
@@ -25,12 +26,12 @@ const AdminDashboard = () => {
                     expiredRes,
                     requestsYearRes
                 ] = await Promise.all([
-                    axios.get("https://vehiclebackend-production-5d7c.up.railway.app/vehicle-requests/count"),
-                    axios.get("https://vehiclebackend-production-5d7c.up.railway.app/vehicle-requests/count-assigned"),
-                    axios.get("https://vehiclebackend-production-5d7c.up.railway.app/drivers/count-available"),
-                    axios.get("https://vehiclebackend-production-5d7c.up.railway.app/vehicles/count-available"),
-                    axios.get("https://vehiclebackend-production-5d7c.up.railway.app/vehicles/count-expired"),
-                    axios.get("https://vehiclebackend-production-5d7c.up.railway.app/vehicle-requests/count-per-year")
+                    axios.get(`${API_BASE_URL}/vehicle-requests/count`),
+                    axios.get(`${API_BASE_URL}/vehicle-requests/count-assigned`),
+                    axios.get(`${API_BASE_URL}/drivers/count-available`),
+                    axios.get(`${API_BASE_URL}/vehicles/count-available`),
+                    axios.get(`${API_BASE_URL}/vehicles/count-expired`),
+                    axios.get(`${API_BASE_URL}/vehicle-requests/count-per-year`)
                 ]);
 
                 // Update dashboard counts

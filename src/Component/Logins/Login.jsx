@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import "../../App.css";
 
 const Login = () => {
+    const API_BASE_URL = process.env.REACT_APP_BACKEND_URL;
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
@@ -16,7 +17,7 @@ const Login = () => {
         setLoading(true);
 
         try {
-            const response = await axios.post("https://vehiclebackend-production-5d7c.up.railway.app/auth/login", {
+            const response = await axios.post(`${API_BASE_URL}/auth/login`, {
                 email,
                 password,
             });

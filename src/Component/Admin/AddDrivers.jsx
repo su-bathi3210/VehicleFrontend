@@ -3,6 +3,7 @@ import axios from "axios";
 import "../../App.css";
 
 const AddDrivers = () => {
+    const API_BASE_URL = process.env.REACT_APP_BACKEND_URL;
     const [drivers, setDrivers] = useState([]);
     const [filteredDrivers, setFilteredDrivers] = useState([]);
     const [filters, setFilters] = useState({
@@ -35,7 +36,7 @@ const AddDrivers = () => {
 
     const fetchDrivers = async () => {
         try {
-            const res = await axios.get("https://vehiclebackend-production-5d7c.up.railway.app/drivers");
+            const res = await axios.get(`${API_BASE_URL}/drivers`);
             setDrivers(res.data || []);
             setFilteredDrivers(res.data || []);
         } catch (err) {
@@ -160,14 +161,14 @@ const AddDrivers = () => {
         try {
             if (modalMode === "edit" && modalData.driverId) {
                 await axios.put(
-                    `https://vehiclebackend-production-5d7c.up.railway.app/drivers/${modalData.driverId}`,
+                    `${API_BASE_URL}/${modalData.driverId}`,
                     payload
                 );
                 alert("✅ Driver updated successfully!");
             } else {
                 const id = generateDriverId();
                 payload.driverId = id;
-                await axios.post("https://vehiclebackend-production-5d7c.up.railway.app/drivers", payload);
+                await axios.post(`${API_BASE_URL}/drivers`, payload);
                 alert("✅ Driver added successfully!");
             }
 
@@ -184,7 +185,7 @@ const AddDrivers = () => {
         if (!driver || !driver.driverId) return;
         if (!window.confirm("Are you sure you want to delete this driver?")) return;
         try {
-            await axios.delete(`https://vehiclebackend-production-5d7c.up.railway.app/drivers/${driver.driverId}`);
+            await axios.delete(`${API_BASE_URL}/drivers/${driver.driverId}`);
             alert("✅ Driver deleted successfully!");
             fetchDrivers();
         } catch (err) {

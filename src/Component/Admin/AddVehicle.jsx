@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import "../../App.css";
 
 const AddVehicle = () => {
+    const API_BASE_URL = process.env.REACT_APP_BACKEND_URL;
     const [vehicles, setVehicles] = useState([]);
     const [filteredVehicles, setFilteredVehicles] = useState([]);
     const [expiredVehicles, setExpiredVehicles] = useState([]);
@@ -28,7 +29,7 @@ const AddVehicle = () => {
 
     const fetchVehicles = async () => {
         try {
-            const res = await axios.get("https://vehiclebackend-production-5d7c.up.railway.app/vehicles");
+            const res = await axios.get(`${API_BASE_URL}/vehicles`);
             setVehicles(res.data || []);
             setFilteredVehicles(res.data || []);
         } catch (err) {
@@ -157,13 +158,13 @@ const AddVehicle = () => {
         try {
             if (modalMode === "edit" && modalData.vehicleId) {
                 await axios.put(
-                    `https://vehiclebackend-production-5d7c.up.railway.app/vehicles/${modalData.vehicleId}`,
+                    `${API_BASE_URL}/vehicles/${modalData.vehicleId}`,
                     payload
                 );
                 alert("✅ Vehicle updated successfully!");
             } else {
                 payload.vehicleId = generateVehicleId();
-                await axios.post("https://vehiclebackend-production-5d7c.up.railway.app/vehicles", payload);
+                await axios.post(`${API_BASE_URL}/vehicles`, payload);
                 alert("✅ Vehicle added successfully!");
             }
 
@@ -184,7 +185,7 @@ const AddVehicle = () => {
         if (!vehicle?.vehicleId) return;
         if (!window.confirm("Are you sure you want to delete this vehicle?")) return;
         try {
-            await axios.delete(`https://vehiclebackend-production-5d7c.up.railway.app/vehicles/${vehicle.vehicleId}`);
+            await axios.delete(`${API_BASE_URL}/vehicles/${vehicle.vehicleId}`);
             alert("✅ Vehicle deleted successfully!");
             fetchVehicles();
         } catch (err) {
